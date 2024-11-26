@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import UserRegister
+from task1.models import Buyer, Game
+
 
 # Create your views here.
 def platform(request):
@@ -12,16 +14,20 @@ def platform(request):
     }
     return render(request, 'fourth_task/platform.html', context)
 
+
 def shop(request):
     title = 'Магазин'
     text = 'Магазин'
+    games = Game.objects.all()
     context = {
         'title': title,
         'text': text,
-        #'games:': ['Doom II', 'Warcraft', 'Vikings'],
-        'games': ['Doom II', 'Warcraft', 'Vikings']
+        # 'games:': ['Doom II', 'Warcraft', 'Vikings'],
+        # 'games': ['Doom II', 'Warcraft', 'Vikings']
+        'games': games
     }
     return render(request, 'fourth_task/shop.html', context)
+
 
 def cart(request):
     title = 'Корзина'
@@ -34,7 +40,7 @@ def cart(request):
 
 
 def sign_up_by_django(request):
-    users = ['Otto', 'Moritz', 'Ruslan', 'Finduss', 'Karl']
+    # users = ['Otto', 'Moritz', 'Ruslan', 'Finduss', 'Karl']
     info = {}
     if request.method == 'POST':
         form = UserRegister(request.POST)  # обращение request.POST не забыть
@@ -44,15 +50,17 @@ def sign_up_by_django(request):
             repeat_password = form.cleaned_data['repeat_password']
             age = int(form.cleaned_data['age'])
 
-
             if password != repeat_password:
                 info['error'] = 'Пароли не совпадают'
-                # info.update({'error': 'Пользователь уже существует.'})
             elif age < 18:
                 info['error'] = 'Вы должны быть старше 18'
-            elif username in users:
-                info['error'] = 'Пользователь уже существует'
+            elif is_user(username):
+                info['error'] = 'Пользователь %s уже существует' % username
             else:
+                Buyer.objects.create(name=f'{username}', balance=20, age=f'{age}')
+                info = {
+                    'information': f'Пользователь {username} успешно зарегистрирован! В подарок двадцатку на счёт баланса!'
+                }
                 return render(request, 'fifth_task/registration_page.html', info)
 
 
@@ -66,7 +74,7 @@ def sign_up_by_django(request):
 
 
 def sign_up_by_html(request):
-    users = ['Otto', 'Moritz', 'Ruslan', 'Finduss', 'Karl']
+    # users = ['Otto', 'Moritz', 'Ruslan', 'Finduss', 'Karl']
     info = {}
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -76,7 +84,7 @@ def sign_up_by_html(request):
 
         if username in users:
             info['error'] = 'Пользователь уже существует.'
-        elif password != repeat_password:
+        elif is_user(username):
             info['error'] = 'Пароли не совпадают.'
         elif int(age) < 18:
             info['error'] = 'Вы должны быть старше 18.'
@@ -86,3 +94,13 @@ def sign_up_by_html(request):
             # return HttpResponse('Приветствуем, %s!' % username)
 
     return render(request, 'fifth_task/registration_page.html', info)
+
+
+def is_user(username):
+    print(Buyer.objects.all())
+    for name in Buyer.objects.all().values():
+        print(name.get('name'))
+        if username == name.get('name'):
+            return True
+    else:
+        return False

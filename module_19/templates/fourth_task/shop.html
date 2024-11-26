@@ -6,7 +6,9 @@
 {% block content %}
     <ul>
         {% for game in games %}
-            <li>{{ game }} <button>Купить</button></li>
+        <li><p>{{ game.title }} | {{game.description}} | {{game.cost}} <button>Купить</button></p></li>
         {% endfor %}
     </ul>
 {% endblock %}
+
+
