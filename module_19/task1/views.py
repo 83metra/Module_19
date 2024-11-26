@@ -22,7 +22,6 @@ def shop(request):
     context = {
         'title': title,
         'text': text,
-        # 'games:': ['Doom II', 'Warcraft', 'Vikings'],
         # 'games': ['Doom II', 'Warcraft', 'Vikings']
         'games': games
     }
@@ -97,10 +96,8 @@ def sign_up_by_html(request):
 
 
 def is_user(username):
-    print(Buyer.objects.all())
     for name in Buyer.objects.all().values():
-        print(name.get('name'))
-        if username == name.get('name'):
+        if username.lower() == name.get('name').lower():
             return True
     else:
         return False
