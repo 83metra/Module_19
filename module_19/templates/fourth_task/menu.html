@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+    <header>
+        {% block pagename %}
+        <h1>{{text}}</h1>
+        {% endblock %}
+    </header>
+
+    <nav>
+        {% block menu %}
+            <ul>
+                <li>
+                    <a href="{% url 'platform' %}"><h3>Главная страница</h3></a>
+                </li>
+                <li>
+                    <a href="{% url 'shop' %}"><h3>Магазин</h3></a>
+                </li>
+                <li>
+                    <a href="{% url 'cart' %}"><h3>Корзина</h3></a>
+
+                </li>
+            </ul>
+        {% endblock %}
+    </nav>
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+</body>
+</html>
