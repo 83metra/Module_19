@@ -1,0 +1,40 @@
+BODY {background-color: rgb(128,128,128);
+        font-size: 15pt
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a, .pagination strong {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            color: 	#000000;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: rgb(128,128,0);
+        }
+
+        .pagination strong {
+            color: white;
+            background-color: rgb(0,255,255);
+        }
+       .border {
+            border: 4px double silver; /* Параметры границы */
+            background: rgb(128,128,128); /* Цвет фона */
+            padding: 40px; /* Поля вокруг текста */
+       }
+        .bord1 {
+            border-bottom: 1px solid silver; /* Параметры границы */
+            background: rgb(128,128,128); /* Цвет фона */
+            padding: 2 px; /* Поля вокруг текста */
+       }
+        .bord3 {
+            border-top: 1px solid silver; /* Параметры границы */
+            background: rgb(128,128,128); /* Цвет фона */
+            padding: 2 px; /* Поля вокруг текста */
+       }
