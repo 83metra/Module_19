@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Маленький уютный бложик</title>
+    <style>
+    BODY {background-color: rgb(150, 150, 150);
+    font-size: 16pt
+    }
+    .border {
+            border: 4px double silver; /* Параметры границы */
+            background: rgb(150, 150, 150); /* Цвет фона */
+            padding: 1px; /* Поля вокруг текста */
+       }
+    .enter_data {background-color: rgb(203,203,203);}
+    </style>
+</head>
+<body>
+    <h2 align="center">Маленький уютный бложик 1.1</h2>
+    <form method="POST" action="create/">
+        {% csrf_token %%}
+        <div class="enter_data">
+        <fieldset>
+        <legend>Название</legend>
+        <input type="text" name="title" placeholder="Важный пост"/>
+        </fieldset>
+
+        <fieldset>
+        <legend>Текст блога</legend>
+        <textarea name="text" cols="60" rows="7" placeholder="Введите текст, например, я сегодня видел скуфа на лавочке..."></textarea>
+        </fieldset>
+
+        <fieldset>
+        <legend>Тема</legend>
+        <input type="text" name="thema" placeholder="Из жизни скуфов"/>
+        </fieldset>
+
+        <input type="submit" value="Сохранить">
+        </div>
+    </form>
+    {% for post in all_data %}
+        <div class="border">
+            <!--<table>
+                <thead>
+                    <th>Название</th><th>Текст блога</th><th>Тема</th><th></th>
+                </thead>
+                {% for data in all_data %}
+                    <th>{{ data.title }}</th>
+                    <th>{{ data.text }}</th>
+                    <th>{{ data.thema }}</th>
+                    <th><a href="edit/{{post.id}}">Изменить</a></th>
+                {% endfor %}
+            </table>-->
+        <ul><p>{{post.title}}</p>
+            <p>{{post.text}}</p>
+            <p>{{post.created_at}}</p><a href="edit/{{post.id}}">Изменить</a>    |    <a href="delete/{{post.id}}">Удалить</a></ul>
+            </div>
+    {% endfor %}
+
+</body>
+</html>

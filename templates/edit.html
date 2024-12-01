@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+        <legend>Название</legend>
+        <input type="text" name="title" value="{{post.title}}"/>
+        </fieldset>
+
+        <fieldset>
+        <legend>Текст блога</legend>
+        <textarea name="text" cols="60" rows="7" >{{post.text}}</textarea>
+        </fieldset>
+
+        <fieldset>
+        <legend>Тема</legend>
+        <input type="text" name="thema" value="{{post.thema}}"/>
+        </fieldset>
+
+        <input type="submit" value="Сохранить">
+
+    </form>
+
+</body>
+</html>
